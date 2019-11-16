@@ -1,12 +1,11 @@
-import React, { useContext, useState     } from 'react';
+import React, { useContext, useState } from 'react';
 import { createVisit } from '../utils/actions';
 import { FirestoreContext } from '../utils/context';
 import { Field, Control, Label, Input } from 'react-bulma-components/lib/components/form';
 import Button from 'react-bulma-components/lib/components/button';
 
 const initialState = {
-    reason: '',
-    time: ''
+    reason: ''
 };
 
 const myField = (label, value, onChange, inputProps = {}) => (
@@ -42,7 +41,6 @@ export default function BookVisit({ clinicId }) {
         <div className="Page">
             {<Field><Label>{clinic.name}</Label></Field>}
             {myField('Reason', state.reason, reason => setState({ ...state, reason }))}
-            {myField('Time', state.time, time => setState({ ...state, time }))}
             {myButton('Create Visit', handleCreateVisit)}
         </div>
     );
