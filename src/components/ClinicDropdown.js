@@ -6,12 +6,12 @@ const alignment = {
   right: 'right'
 }
 
-class ClinicDropdown extends React.Component {
-  state = {
+const ClinicDropdown = props => {
+  const [state, setState] = useState({
     selected: '',
-  }
+  })
 
-  clinics = [
+  const clinics =[
     {
       name: "montreal clinic",
       id: 1,
@@ -29,80 +29,25 @@ class ClinicDropdown extends React.Component {
     }
   ]
 
-  onChange = (selected) => {
-    this.setState({ selected });
+  const onChange = (selected) => {
+    setState({ selected });
   }
-  render() {
+
     return (
       <Dropdown
-        {...this.props}
-        value={this.state.selected}
-        onChange={this.onChange}
+        {...props}
+        value={state.selected}
+        onChange={onChange}
         color="info"
         label="Clinics">
-        <Dropdown.Item value="item" >
-          Dropdown item
-        </Dropdown.Item>
-        <Dropdown.Item value="other">
-          Other Dropdown item
-        </Dropdown.Item>
-        <Dropdown.Item value="active">
-          Active Dropdown item
-        </Dropdown.Item>
-        <Dropdown.Item value="other 2">
-          Other Dropdown item
-        </Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item value="divider">
-          With divider
-        </Dropdown.Item>
+
+          {clinics && clinics.map(c => (
+            <Dropdown.Item value={c.name} key={c.name}>
+              {c.name}
+            </Dropdown.Item>
+          ))}
       </Dropdown>
     );
-  }
 }
-
-// const ClinicDropdown = props => {
-//   const [state, setState] = useState({
-//     selected: '',
-//   })
-
-//   const clinics =[
-//     {
-//       name: "montreal clinic",
-//       id: 1,
-//       address: "847 sherbrooke"
-//     },
-//     {
-//       name: "mcgill clinic",
-//       id: 2,
-//       address: "847 university"
-//     },
-//     {
-//       name: "west island clinic",
-//       id: 3,
-//       address: "837 sources"
-//     }
-//   ]
-
-//   const onChange = (selected) => {
-//     setState({ selected });
-//   }
-
-//     return (
-//       <Dropdown
-//         {...props}
-//         value={state.selected}
-//         onChange={onChange}
-//         color="info"
-//         label="Clinics">
-
-//           {clinics && clinics.map(c => (
-//             <Dropdown.Item value="item">
-//               {c.name}
-//             </Dropdown.Item>
-//           ))}
-//       </Dropdown>
-//     );
-// }
 
 export default ClinicDropdown
