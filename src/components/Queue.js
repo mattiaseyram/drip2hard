@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
-import Box from 'react-bulma-components/lib/components/box';
+import React, { useContext } from 'react';
 import Section from 'react-bulma-components/lib/components/section'
 import { FirestoreContext } from '../utils/context'
 import QueueItem from './QueueItem'
-import QueueItemNew from './QueueItemNew'
+
 
 import Content from 'react-bulma-components/lib/components/content';
 
@@ -37,7 +36,7 @@ const Queue = () => {
       </Content>
       {
         queueItems && queueItems.map(visit => (
-          visit.clinicId == clinic.id ?
+          visit.clinicId === clinic.id ?
           <QueueItem data={visit} key={visit.id} />
           : null
         ))

@@ -1,15 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Level from 'react-bulma-components/lib/components/level';
 import Heading from 'react-bulma-components/lib/components/heading';
-import { FirestoreContext } from '../utils/context';
 import Box from 'react-bulma-components/lib/components/box';
 
-
-
 const QueueItem = props => {
-  const { user, visits, profiles, clinic } = useContext(FirestoreContext);
-
-
   return (
     <Box className="level-hover">
       <Level>
