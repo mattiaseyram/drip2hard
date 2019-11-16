@@ -7,6 +7,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import CreateClinic from './pages/CreateClinic';
 import UpdateClinic from './pages/UpdateClinic';
+import BookVisit from './pages/BookVisit';
 import NotFound from './pages/NotFound';
 import { FirestoreContext } from './utils/context';
 import { useUser, useClinic } from './utils/hooks';
@@ -31,6 +32,7 @@ export default function App() {
             <SignUp path="/signup" />
             <CreateClinic path="/create_clinic" />
             <UpdateClinic path="/clinics/:clinicId" />
+            <BookVisit path="/clinics/:clinicId/create_visit" />
             <NotFound default />
           </Router>
         </Container>
