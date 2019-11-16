@@ -14,6 +14,8 @@ import { FirestoreContext } from './utils/context';
 import { useUser, useClinic } from './utils/hooks';
 import Container from 'react-bulma-components/lib/components/container';
 
+import Admin from './pages/Admin'
+
 export default function App() {
 
   const [clinicId, setClinicId] = useState('');
@@ -35,6 +37,7 @@ export default function App() {
             <FindClinic path="/clinics/find" />
             <UpdateClinic path="/clinics/:clinicId" />
             <BookVisit path="/clinics/:clinicId/create_visit" />
+            <Admin path="/admin/:clinicId" />
             <NotFound default />
           </Router>
         </Container>
