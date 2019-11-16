@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from '@reach/router';
 import Navbar from 'react-bulma-components/lib/components/navbar';
 import { signOut } from '../utils/actions';
+import Dropdown from 'react-bulma-components/lib/components/dropdown'
+import ClinicDropdown from './ClinicDropdown'
 
 export default function NavigationBar() {
 
@@ -19,6 +21,9 @@ export default function NavigationBar() {
                 <Navbar.Item renderAs={Link} to="/clinics/find">Find Clinic</Navbar.Item>
                 <Navbar.Item renderAs={Link} to="/clinics/clinic1">Update Clinic</Navbar.Item>
                 <Navbar.Item renderAs={Link} to="/clinics/clinic1/create_visit">Book an Appointment</Navbar.Item>
+                <Navbar.Item>
+                    <ClinicDropdown />
+                </Navbar.Item>
                 <Navbar.Item onClick={handleSignOut}>Sign Out</Navbar.Item>
             </Navbar.Menu>
         </Navbar>
