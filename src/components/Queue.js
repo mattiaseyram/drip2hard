@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState, useContext } from 'react';
 import Box from 'react-bulma-components/lib/components/box';
 import Section from 'react-bulma-components/lib/components/section'
-
+import { FirestoreContext } from '../utils/context'
 import QueueItem from './QueueItem'
+
+import Content from 'react-bulma-components/lib/components/content';
+
 
 const data = [
   {
@@ -39,13 +42,18 @@ const data = [
 
 
 const Queue = () => {
+  const { visits, profiles } = useContext(FirestoreContext)
+  const visitsArr = visits && Object.values(visits)
+
+  console.log("VIsits: ", visitsArr, profiles)
   return (
     <Section>
+      <Content>
+        <h2>Upcoming visits</h2>
+      </Content>
       {
-        data && data.map((item, index) => (
-          <Box  key={item.uid}>
-            <QueueItem data={item}/>
-          </Box>
+        visitsArr && visitsArr.map(visit => (
+          <QueueItem data={visit} key={visit.id} />
         ))
       }
     </Section>

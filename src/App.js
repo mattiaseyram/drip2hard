@@ -11,7 +11,7 @@ import UpdateClinic from './pages/UpdateClinic';
 import BookVisit from './pages/BookVisit';
 import NotFound from './pages/NotFound';
 import { FirestoreContext } from './utils/context';
-import { useUser, useClinic } from './utils/hooks';
+import { useUser, useClinic, useVisit } from './utils/hooks';
 import Container from 'react-bulma-components/lib/components/container';
 
 import Admin from './pages/Admin'
@@ -19,12 +19,14 @@ import Admin from './pages/Admin'
 export default function App() {
 
   const [clinicId, setClinicId] = useState('');
+  const [visitId, setVisitId] = useState('');
 
-  const { user, profile } = useUser();
+  const { user, profile, profiles } = useUser();
   const { clinics, clinic } = useClinic(clinicId);
+  const { visits, visit } = useVisit(visitId)
 
   return (
-    <FirestoreContext.Provider value={{ user, profile, clinics, clinic, setClinicId }}>
+    <FirestoreContext.Provider value={{ user, profile, profiles, clinics, clinic, setClinicId, visits, visit, setVisitId }}>
       <div className="App">
         <Navbar />
         <Container className="has-margin-top">
