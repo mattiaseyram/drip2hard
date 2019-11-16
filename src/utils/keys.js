@@ -1,4 +1,4 @@
-const firebaseConfig = {
+export const firebaseConfig = {
     apiKey: "AIzaSyBmkuhK03sozr1Zzkbv0plTyvNZLwvFoIc",
     authDomain: "drip2hard.firebaseapp.com",
     databaseURL: "https://drip2hard.firebaseio.com",
@@ -9,4 +9,6 @@ const firebaseConfig = {
     measurementId: "G-69JZYZ0N2H"
 };
 
-export default firebaseConfig;
+export const googleMapsApiKey = 'AIzaSyBhxEM1F170BESCPPFLewZ6iusKZ98aUpw';
+
+export const mapGLToken = 'pk.eyJ1IjoibWF0dGlhc2V5cmFtIiwiYSI6ImNrMzF6cHF5dzA3NHczY29xYXNoZ29xaHMifQ.ksykRAYLiF4buKY-WImO-Q';

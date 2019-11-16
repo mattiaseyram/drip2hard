@@ -6,8 +6,6 @@ const initialState = {
     id: '',
     name: '',
     address: '',
-    coordinateX: '',
-    coordinateY: '',
     doctor_ids: ''
 };
 
@@ -43,8 +41,6 @@ export default function ClinicForm({ buttonLabel, clinic, action, includeID }) {
             {includeID && myField('ID', state.id, id => setState({ ...state, id }))}
             {myField('Name', state.name, name => setState({ ...state, name }))}
             {myField('Address', state.address, address => setState({ ...state, address }))}
-            {myField('X Coordinate', state.coordinateX, coordinateX => setState({ ...state, coordinateX }))}
-            {myField('Y Coordinate', state.coordinateY, coordinateY => setState({ ...state, coordinateY }))}
             {myField('Doctors', state.doctor_ids, doctor_ids => setState({ ...state, doctor_ids }))}
             {myButton(buttonLabel, handleAction)}
         </>
