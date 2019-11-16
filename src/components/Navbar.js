@@ -17,6 +17,7 @@ export default function NavigationBar() {
                 <Navbar.Item renderAs={Link} to="/signup">Sign Up</Navbar.Item>
                 <Navbar.Item renderAs={Link} to="/create_clinic">Create Clinic</Navbar.Item>
                 <Navbar.Item renderAs={Link} to="/clinics/clinic1">Update Clinic</Navbar.Item>
+                <Navbar.Item renderAs={Link} to="/clinics/clinic1/create_visit">Book an Appointment</Navbar.Item>
                 <Navbar.Item onClick={handleSignOut}>Sign Out</Navbar.Item>
             </Navbar.Menu>
         </Navbar>

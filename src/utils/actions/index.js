@@ -12,3 +12,4 @@ export const callHelloWorld = async () => {
 
 export * from './user';
 export * from './clinic';
+export * from './visit';
