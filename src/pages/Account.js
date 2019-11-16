@@ -37,7 +37,7 @@ export default function SignUp() {
                         </Control>
                     </Field>
                 </>
-                : <p>You are signed not in!</p>
+                : <p>You are not signed in!</p>
             }
         </div>
     );
