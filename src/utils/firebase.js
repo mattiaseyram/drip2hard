@@ -1,10 +1,10 @@
-import config from './firebaseConfig';
+import { firebaseConfig } from './keys';
 import firebase from 'firebase/app';
 import 'firebase/functions';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-const app = firebase.initializeApp(config);
+const app = firebase.initializeApp(firebaseConfig);
 
 if (process.env.REACT_APP_LOCAL_FUNCTIONS === "true") {
     console.warn('React app started using local functions.');
