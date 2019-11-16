@@ -2,18 +2,23 @@ import { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 
 const usersRef = db.collection('users');
-const userRef = id => usersRef.doc(id);
+//const userRef = id => usersRef.doc(id);
 
 export function useUser() {
-    const [state, setState] = useState({ user: null, profile: null });
+    const [state, setState] = useState({ user: null, profile: null, profiles: null });
 
     useEffect(() => {
         auth.onAuthStateChanged(user => {
             if (user) {
-                userRef(user.uid).onSnapshot(doc => {
-                    const profile = doc.data();
-                    setState({ user, profile })
-                })
+                usersRef.onSnapshot(querySnapshot => {
+                    let profiles = {};
+                    querySnapshot.forEach(doc => {
+                        profiles[doc.id] = {...doc.data(), id: doc.id};
+                    });
+
+                    const profile = profiles[user.uid];
+                    setState({ user, profile, profiles });
+                });
             } else {
                 setState({ user: null, profile: null });
             }
@@ -46,6 +51,34 @@ export function useClinic(clinicId = '') {
             }
         });
     }, [clinicId]);
+
+    return state;
+}
+
+
+const visitsRef = db.collection('visits');
+//const visitRef = id => clinicsRef.doc(id);
+
+export function useVisit(visitId = '') {
+    const [state, setState] = useState({ visits: null, visit: null });
+
+    useEffect(() => {
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                visitsRef.onSnapshot(querySnapshot => {
+                    let visits = {};
+                    querySnapshot.forEach(doc => {
+                        visits[doc.id] = doc.data();
+                    });
+
+                    const visit = visitId ? visits[visitId] : null;
+                    setState({ visits, visit })
+                });
+            } else {
+                setState({ visits: null, visit: null });
+            }
+        });
+    }, [visitId]);
 
     return state;
 }
