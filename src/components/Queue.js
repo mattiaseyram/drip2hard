@@ -1,6 +1,4 @@
 import React from 'react'
-import Level from 'react-bulma-components/lib/components/level';
-import Heading from 'react-bulma-components/lib/components/heading';
 import Box from 'react-bulma-components/lib/components/box';
 import Section from 'react-bulma-components/lib/components/section'
 
@@ -45,8 +43,8 @@ const Queue = () => {
     <Section>
       {
         data && data.map((item, index) => (
-          <Box>
-            <QueueItem data={item} key = {item.uid}/>
+          <Box  key={item.uid}>
+            <QueueItem data={item}/>
           </Box>
         ))
       }

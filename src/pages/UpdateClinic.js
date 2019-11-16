@@ -7,6 +7,7 @@ export default function CreateClinic({ clinicId = '' }) {
 
     const { user, clinic, setClinicId } = useContext(FirestoreContext);
 
+    // if (!clinic && clinicId !== clinic.id) setClinicId(clinicId);
     if (!clinic) setClinicId(clinicId);
 
     const formProps = {

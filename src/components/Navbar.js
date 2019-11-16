@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from '@reach/router';
 import Navbar from 'react-bulma-components/lib/components/navbar';
 import { signOut } from '../utils/actions';
-import Dropdown from 'react-bulma-components/lib/components/dropdown'
 import ClinicDropdown from './ClinicDropdown'
 
 export default function NavigationBar() {
