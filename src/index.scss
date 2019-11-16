@@ -5,3 +5,10 @@
 .has-margin-top {
     margin-top: 1vh
 }
+
+.level-hover {
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 12px rgba(33,33,33,.2);
+    }
+}

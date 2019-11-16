@@ -3,6 +3,7 @@ import { FirestoreContext } from '../utils/context';
 import { Link } from '@reach/router';
 import Navbar from 'react-bulma-components/lib/components/navbar';
 import { signOut } from '../utils/actions';
+import ClinicDropdown from './ClinicDropdown'
 
 const supers = ['admin', 'doctor'];
 
@@ -14,7 +15,7 @@ export default function NavigationBar() {
         const item = (<Navbar.Item renderAs={Link} to={to}>{label}</Navbar.Item>);
         if (options === 'all') return item;
         if (options === 'authed' && user) return item;
-        if (options === 'supers' && user && supers.includes(profile.user_type)) return item;
+        if (options === 'supers' && profile && supers.includes(profile.user_type)) return item;
         if (options === 'unauthed' && !user) return item;
         return null;
     };
@@ -27,6 +28,7 @@ export default function NavigationBar() {
                 {navLink('Account', '/account', 'authed')}
                 {navLink('Find Clinic', '/clinics/find', 'authed')}
                 {navLink('Create Clinic', '/clinics/create', 'supers')}
+                {profile && supers.includes(profile.user_type) && <ClinicDropdown/>}
                 {navLink('Sign In', '/signin', 'unauthed')}
                 {navLink('Sign Up', '/signup', 'unauthed')}
                 {user && <Navbar.Item onClick={handleSignOut}>Sign Out</Navbar.Item>}
