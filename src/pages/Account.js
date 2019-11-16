@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { updateUser } from '../utils/actions';
-import { UserContext } from '../utils/context';
+import { FirestoreContext } from '../utils/context';
 import AccountForm from '../components/AccountForm';
 
 export default function Account() {
 
-    const { user, profile } = useContext(UserContext);
+    const { user, profile } = useContext(FirestoreContext);
 
     const formProps = {
         buttonLabel: 'Update Account',

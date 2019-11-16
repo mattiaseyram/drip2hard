@@ -1,3 +1,3 @@
 import { createContext } from 'react';
 
-export const UserContext = createContext({user: null, profile: null });
+export const FirestoreContext = createContext({user: null, profile: null, clinic: null, visits: null });

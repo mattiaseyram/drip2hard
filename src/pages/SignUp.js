@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { createUserWithEmailAndPassword } from '../utils/actions';
-import { UserContext } from '../utils/context';
+import { FirestoreContext } from '../utils/context';
 import AccountForm from '../components/AccountForm';
 
 export default function SignUp() {
 
-    const { user, profile } = useContext(UserContext);
+    const { user, profile } = useContext(FirestoreContext);
 
     const formProps = {
         buttonLabel: 'Create Account',
