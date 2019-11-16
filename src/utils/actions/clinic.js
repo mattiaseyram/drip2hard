@@ -31,7 +31,7 @@ const getCoordsFromAddress = async (address) => {
         const coords = json.results[0].geometry.location;
         return { latitude: coords.lat, longitude: coords.lng };
     } catch (err) {
-        console.log('Error retrieving coords from address');
+        console.error('Error retrieving coords from address');
         return { latitude: 0, longitude: 0 };
     }
 }

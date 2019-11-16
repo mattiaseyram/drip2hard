@@ -48,7 +48,7 @@ export default function FindClinic() {
     const [currentCoords, setCurrentCoords] = useState({ latitude: 0, longitude: 0 });
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(pos => {
+        return navigator.geolocation.getCurrentPosition(pos => {
             const coords = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
             setCurrentCoords(coords);
             setViewport(viewport => ({ ...viewport, ...coords }));
