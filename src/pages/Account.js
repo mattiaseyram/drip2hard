@@ -1,42 +1,23 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Field, Control, Label, Input } from 'react-bulma-components/lib/components/form';
-import Button from 'react-bulma-components/lib/components/button';
+import React, { useContext } from 'react';
 import { updateUser } from '../utils/actions';
 import { UserContext } from '../utils/context';
+import AccountForm from '../components/AccountForm';
 
-const myField = (label, value, onChange, inputProps = {}) => (
-    <Field>
-        <Label>{label}</Label>
-        <Control>
-            <Input value={value} onChange={evt => onChange(evt.target.value)} {...inputProps} />
-        </Control>
-    </Field>
-);
-
-export default function SignUp() {
+export default function Account() {
 
     const { user, profile } = useContext(UserContext);
 
-    const [data, setData] = useState({ nickname: '' });
-
-    useEffect(() => {
-        const nickname = profile ? profile.nickname : '';
-        setData(data => ({ ...data, nickname }));
-    }, [profile]);
-
-    const handleUpdateUser = () => updateUser(data);
+    const formProps = {
+        buttonLabel: 'Update Account',
+        action: updateUser,
+        user,
+        profile
+    };
 
     return (
         <div className="Page">
             {user
-                ? <>
-                    {myField('Nickname', data.nickname, nickname => setData({ ...data, nickname }))}
-                    <Field kind="group">
-                        <Control>
-                            <Button type="primary" onClick={handleUpdateUser}>Update Account</Button>
-                        </Control>
-                    </Field>
-                </>
+                ? <AccountForm {...formProps} />
                 : <p>You are not signed in!</p>
             }
         </div>
