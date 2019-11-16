@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Field, Control, Label, Input } from 'react-bulma-components/lib/components/form';
 import Button from 'react-bulma-components/lib/components/button';
 import { signInWithEmailAndPassword } from '../utils/actions';
-import { UserContext } from '../utils/context';
+import { FirestoreContext } from '../utils/context';
 
 const myField = (label, value, onChange, inputProps = {}) => (
     <Field>
@@ -15,7 +15,7 @@ const myField = (label, value, onChange, inputProps = {}) => (
 
 export default function SignIn() {
 
-    const { user } = useContext(UserContext);
+    const { user } = useContext(FirestoreContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

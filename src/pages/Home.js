@@ -6,7 +6,7 @@ import Button from 'react-bulma-components/lib/components/button';
 import Box from 'react-bulma-components/lib/components/box';
 import Section from 'react-bulma-components/lib/components/section';
 import { callHelloWorld } from '../utils/actions';
-import { UserContext } from '../utils/context';
+import { FirestoreContext } from '../utils/context';
 
 function FunctionSection({ label, message, action }) {
     return (
@@ -41,7 +41,7 @@ function FunctionSection({ label, message, action }) {
 
 export default function Home() {
 
-    const { profile } = useContext(UserContext);
+    const { profile } = useContext(FirestoreContext);
 
     const [message, setMessage] = useState('');
 
