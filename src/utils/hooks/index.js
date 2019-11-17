@@ -68,7 +68,9 @@ export function useVisit(visitId = '') {
                 visitsRef.onSnapshot(querySnapshot => {
                     let visits = {};
                     querySnapshot.forEach(doc => {
-                        visits[doc.id] = doc.data();
+                        let visitData = doc.data();
+                        visitData.time = visitData.time ? visitData.time.toDate() : null;
+                        visits[doc.id] = visitData;
                     });
 
                     const visit = visitId ? visits[visitId] : null;

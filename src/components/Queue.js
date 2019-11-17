@@ -1,33 +1,26 @@
 import React, { useContext } from 'react';
 import Section from 'react-bulma-components/lib/components/section'
 import { FirestoreContext } from '../utils/context'
+import { useTime } from '../utils/hooks'
 import QueueItem from './QueueItem'
-
-
 import Content from 'react-bulma-components/lib/components/content';
 
 const Queue = () => {
-  const { visits, profiles, clinic, time } = useContext(FirestoreContext)
+  const { visits, profiles, clinic } = useContext(FirestoreContext)
+  const { time } = useTime();
   const visitsArr = visits && Object.values(visits)
 
-  const queueItems = []
+  const queueItems = (visitsArr || [])
+    .filter(visit => visit.clinic_id === clinic.id)
+    .map(visit => ({
+      ...visit,
+      profile: { ...profiles[visit.user_id] }
+    }))
+    .map((visit, i) => (
+      <QueueItem visit={visit} key={i} />
+    ));
 
-  visitsArr && visitsArr.forEach(visit => {
-    const queueItem = {
-      reason: visit.reason,
-      time: visit.time,
-      visitId: visit.id,
-      clinicId: visit.clinic_id,
-      user: {
-        id: visit.user_id,
-        email: profiles[visit.user_id].email,
-        nickname: profiles[visit.user_id].nickname,
-      }
-    }
-    queueItems.push(queueItem)
-  })
-
-  const formattedTime = (new Date(time)).toString()
+  const formattedTime = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
 
   return (
     <Section>
@@ -44,13 +37,8 @@ const Queue = () => {
       <Content>
         <h2>Upcoming visits</h2>
       </Content>
-      {
-        queueItems && queueItems.map(visit => (
-          visit.clinicId === clinic.id ?
-            <QueueItem data={visit} key={visit.id} />
-            : null
-        ))
-      }
+
+      {queueItems}
     </Section>
   )
 };
