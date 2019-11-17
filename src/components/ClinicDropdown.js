@@ -19,6 +19,7 @@ const ClinicDropdown = props => {
 
     return (
       <Dropdown
+      className="clinic-dropdown"
         {...props}
         value={state.selected}
         onChange={onChange}
