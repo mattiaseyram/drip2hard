@@ -9,6 +9,7 @@ import CreateClinic from './pages/CreateClinic';
 import FindClinic from './pages/FindClinic';
 import UpdateClinic from './pages/UpdateClinic';
 import BookVisit from './pages/BookVisit';
+import FaceCheckIn from './pages/FaceCheckIn';
 import NotFound from './pages/NotFound';
 import { FirestoreContext } from './utils/context';
 import { useUser, useClinic, useVisit } from './utils/hooks';
@@ -40,6 +41,7 @@ export default function App() {
             <UpdateClinic path="/clinics/:clinicId" />
             <BookVisit path="/clinics/:clinicId/create_visit" />
             <Admin path="/admin/:clinicId" />
+            <FaceCheckIn path="/check_in" />
             <NotFound default />
           </Router>
         </Container>

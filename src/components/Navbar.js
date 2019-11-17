@@ -29,6 +29,7 @@ export default function NavigationBar() {
                 {user && <ClinicDropdown />}
                 {navLink('Sign In', '/signin', 'unauthed')}
                 {navLink('Sign Up', '/signup', 'unauthed')}
+                {navLink('Check In', '/check_in', 'all')}
                 {user && <Navbar.Item onClick={handleSignOut}>Sign Out</Navbar.Item>}
             </Navbar.Container>
         </Navbar>

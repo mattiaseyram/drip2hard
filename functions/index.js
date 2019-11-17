@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const fetch = require('node-fetch');
 
 try {
     const serviceAccount = require('../serviceAccountKey.json');
@@ -66,7 +67,7 @@ exports.setNextUp = functions.firestore.document('visits/{visit_id}').onWrite(as
         const { clinic_id } = visit;
 
         let visitIds = [];
-        
+
         const snapshot = await visitsRef.orderBy("time", "asc").get();
         snapshot.forEach(doc => {
             const data = doc.data();
@@ -81,5 +82,23 @@ exports.setNextUp = functions.firestore.document('visits/{visit_id}').onWrite(as
 
     } catch (err) {
         console.error('Error in setNextUp: ' + err.message);
+    }
+});
+
+exports.compareImages = functions.https.onCall(async (data, context) => {
+    try {
+        const api_key = 'giteKBciLwB_vwaOWI_klcFhF2fzCTVe';
+        const api_secret = 'SECRET';
+        const baseUrl = 'https://api-us.faceplusplus.com/facepp/v3/compare';
+        const { image_url1, image_url2 } = data;
+
+        const url = `${baseUrl}?api_key=${api_key}&api_secret=${api_secret}&image_url1=${image_url1}&image_url2=${image_url2}`;
+
+        const result = await fetch(url, { method: 'POST' });     
+        return await result.json();
+
+    } catch (err) {
+        console.error('Error in compareImages: ' + err.message);
+        throw new functions.https.HttpsError('unknown', 'Error in compareImages: ' + err.message);
     }
 });

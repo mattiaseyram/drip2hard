@@ -40,7 +40,7 @@ const QueueItem = ({ visit }) => {
   const contextValues = useContext(FirestoreContext);
   const userProfile = contextValues.profile;
 
-  const isSuper = userProfile.user_type && supers.includes(userProfile.user_type);
+  const isSuper = userProfile && userProfile.user_type && supers.includes(userProfile.user_type);
 
   const { time } = useTime();
   const { profile, reason } = visit;
