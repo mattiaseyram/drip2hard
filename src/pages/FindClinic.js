@@ -63,14 +63,14 @@ export default function FindClinic() {
 
         return (
             <Marker key={i} latitude={latitude} longitude={longitude}>
-                <Box>{clinic.name}<br />{clinic.address}</Box>
+                <Box className="level-hover">{clinic.name}<br />{clinic.address}</Box>
             </Marker>
         );
     });
 
     const userMarker = (
         <Marker latitude={currentCoords.latitude} longitude={currentCoords.longitude}>
-            <Box><FontAwesomeIcon icon={faUser} /></Box>
+            <Box className="level-hover"><FontAwesomeIcon icon={faUser} /></Box>
         </Marker>
     );
 
