@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import Dropdown from 'react-bulma-components/lib/components/dropdown'
+import React from 'react';
 import Button from 'react-bulma-components/lib/components/button';
 import { updateVisit } from '../utils/actions/visit'
 

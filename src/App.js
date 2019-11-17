@@ -11,7 +11,7 @@ import UpdateClinic from './pages/UpdateClinic';
 import BookVisit from './pages/BookVisit';
 import NotFound from './pages/NotFound';
 import { FirestoreContext } from './utils/context';
-import { useUser, useClinic, useVisit, useTime } from './utils/hooks';
+import { useUser, useClinic, useVisit } from './utils/hooks';
 import Container from 'react-bulma-components/lib/components/container';
 
 import Admin from './pages/Admin'

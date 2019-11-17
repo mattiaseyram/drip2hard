@@ -58,7 +58,7 @@ const QueueItem = ({ visit }) => {
 
         <Level.Side align="right">
           <Level.Item>
-          {visit.status == 'new' ? formattedTime : null}
+          {visit.status === 'new' ? formattedTime : null}
           </Level.Item>
         </Level.Side>
 
