@@ -9,38 +9,10 @@ import Container from 'react-bulma-components/lib/components/container';
 
 import Queue from '../components/Queue'
 
-// const ClinicSection = props => {
-
-//   const clinicData = props.clinic
-
-//   return (
-//     <Section>
-//       {
-//         clinicData ?
-//           <Box>
-//             <Level>
-//               <Level.Side align="left">
-//                 <Level.Item>
-//                   <Heading size={5} subtitle>{clinicData.id}</Heading>
-//                 </Level.Item>
-//               </Level.Side>
-//             </Level>
-//           </Box> : null
-//       }
-//     </Section>
-//   )
-// };
-
 const Admin = ({ clinicId = '' }) => {
   const { user, clinic, setClinicId } = useContext(FirestoreContext);
 
   if (!clinic || clinic.id !== clinicId) setClinicId(clinicId);
-
-  // const clinicProps = {
-  //   clinic
-  // }
-
-  console.log("in admin", clinic)
 
   return (
     <div >

@@ -7,7 +7,7 @@ import QueueItem from './QueueItem'
 import Content from 'react-bulma-components/lib/components/content';
 
 const Queue = () => {
-  const { visits, profiles, clinic } = useContext(FirestoreContext)
+  const { visits, profiles, clinic, time } = useContext(FirestoreContext)
   const visitsArr = visits && Object.values(visits)
 
   const queueItems = []
@@ -27,18 +27,28 @@ const Queue = () => {
     queueItems.push(queueItem)
   })
 
-  console.log("queue itemssss", queueItems)
+  const formattedTime = (new Date(time)).toString()
 
   return (
     <Section>
+
+      <Content>
+        <h2>Current time</h2>
+        {formattedTime}
+      </Content>
+
+      <Content>
+        <h2>Currently serving</h2>
+      </Content>
+
       <Content>
         <h2>Upcoming visits</h2>
       </Content>
       {
         queueItems && queueItems.map(visit => (
           visit.clinicId === clinic.id ?
-          <QueueItem data={visit} key={visit.id} />
-          : null
+            <QueueItem data={visit} key={visit.id} />
+            : null
         ))
       }
     </Section>
