@@ -7,7 +7,8 @@ export const createVisit = async (data = {}, clinicId) => {
     try {
         const user = auth.currentUser;
         const doc = visitsRef.doc();
-        await doc.set({ ...data, id: doc.id, user_id: user.uid, clinic_id: clinicId });
+        const time = new Date();
+        await doc.set({ ...data, id: doc.id, user_id: user.uid, clinic_id: clinicId, time });
     } catch (err) {
         console.error(err);
     }
