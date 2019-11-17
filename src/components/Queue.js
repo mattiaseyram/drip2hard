@@ -52,9 +52,15 @@ const Queue = () => {
       <Section>
         <Content>
           <h2>Upcoming visits</h2>
+          {queueItems && queueItems.filter(item => item.props.visit.status === 'new' || item.props.visit.status === 'in_progress')}
         </Content>
+      </Section>
 
-        {queueItems}
+      <Section>
+        <Content>
+          <h2>Completed Visits</h2>
+          {queueItems && queueItems.filter(item => item.props.visit.status === 'done')}
+        </Content>
       </Section>
     </>
   )
