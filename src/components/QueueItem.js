@@ -41,7 +41,6 @@ const QueueItem = ({ visit }) => {
 
   const formattedTime = getTimeDifference(time, visit.time);
 
-
   return (
     <Box className="level-hover">
       <Level>
@@ -59,13 +58,13 @@ const QueueItem = ({ visit }) => {
 
         <Level.Side align="right">
           <Level.Item>
-            {formattedTime}
+          {visit.status == 'new' ? formattedTime : null}
           </Level.Item>
         </Level.Side>
 
         <Level.Side align="right">
-          <Level.Item>
-            <VisitStatus/>
+          <Level.Item>{}
+            <VisitStatus visit={visit}/>
           </Level.Item>
         </Level.Side>
       </Level>
