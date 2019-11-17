@@ -60,7 +60,6 @@ const QueueItem = ({ visit }) => {
         <Level.Side align="right">
           <Level.Item>
             {formattedTime}
-            <Heading size={5} subtitle>time</Heading>
           </Level.Item>
         </Level.Side>
 
