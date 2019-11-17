@@ -27,6 +27,7 @@
     "deploy": "react-scripts build && firebase deploy",
     "functionsShell": "firebase functions:shell",
     "functions": "firebase serve --only functions",
+    "firestore": "firebase emulators:start --only firestore",
     "localstart": "REACT_APP_LOCAL_FUNCTIONS=true react-scripts start",
     "ci_deploy": "react-scripts build && firebase deploy --token $FIREBASE_TOKEN --non-interactive"
   },
