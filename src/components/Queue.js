@@ -27,7 +27,7 @@ const Queue = () => {
 
       <Content>
         <h2>Current time</h2>
-        {formattedTime}
+        <h3>{formattedTime}</h3>
       </Content>
 
       <Content>

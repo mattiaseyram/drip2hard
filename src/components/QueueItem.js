@@ -16,7 +16,7 @@ const  millisToMinutesAndSeconds = (time) => {
 
 const getTimeDifference = (currentTime, visitTime) => {
   if (!currentTime || !visitTime) return 'No Time';
-  const diff = -(currentTime.getTime() - visitTime.getTime()) + 2400000;
+  const diff = -(currentTime.getTime() - visitTime.getTime());
   const formattedDiff = millisToMinutesAndSeconds(diff);
 ;
   let color = 'success';
