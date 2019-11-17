@@ -30,9 +30,10 @@ export default function FaceCheckIn() {
 
                 if (profile.photo) {
                     try {
-                        const result = await functions.httpsCallable('compareImages')({ image_url1: profile.photo, image_url2 });
+                        const image_url1 = profile.photo;
+                        const result = await functions.httpsCallable('compareImages')({ image_url1, image_url2 });
                         confidence = result.data.confidence;
-                        console.log('Face Lookup Result: ', profile.nickname, confidence, result);
+                        console.log('Face Lookup Result: ', profile.nickname, confidence, result, image_url1, image_url2);
                     } catch (err) {
                         console.error(err)
                     }
@@ -65,7 +66,7 @@ export default function FaceCheckIn() {
                     <Hero.Body>
                         <Container>
                             <Heading>Check In</Heading>
-                            {state.profile && <Heading subtitle size={3}>{`Hello ${state.profile.nickname}`}</Heading>}
+                            {state.profile && <Heading subtitle size={3}>{`Hello ${state.profile.nickname}.`}</Heading>}
                         </Container>
                     </Hero.Body>
                 </Hero>
