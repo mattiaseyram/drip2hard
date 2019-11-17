@@ -19,7 +19,6 @@ const Admin = ({ clinicId = '' }) => {
       {user && clinic
         ? (
           <Section>
-
             <Hero color="primary" >
               <Hero.Body>
                 <Container>

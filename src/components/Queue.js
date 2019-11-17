@@ -4,9 +4,11 @@ import { FirestoreContext } from '../utils/context'
 import { useTime } from '../utils/hooks'
 import QueueItem from './QueueItem'
 import Content from 'react-bulma-components/lib/components/content';
+import Level from 'react-bulma-components/lib/components/level';
+import Box from 'react-bulma-components/lib/components/box';
 
 const Queue = () => {
-  const { visits, profiles, clinic } = useContext(FirestoreContext)
+  const { visits, profiles, clinic } = useContext(FirestoreContext);
   const { time } = useTime();
   const visitsArr = visits && Object.values(visits)
 
@@ -26,30 +28,36 @@ const Queue = () => {
   const nextProfile = nextVisit && nextVisit.status === 'new' && profiles && profiles[nextVisit.user_id];
 
   return (
-    <Section>
+    <>
+      <Section>
+        <Box>
+          <Level>
+            <Level.Item className="has-text-centered">
+              <div>
+                <p className="heading">Current Time</p>
+                <p className="title">{formattedTime}</p>
+              </div>
+            </Level.Item>
 
-      <Content>
-        <h2>Current time</h2>
-        <h3>{formattedTime}</h3>
-      </Content>
+            <Level.Item className="has-text-centered">
+              <div>
+                <p className="heading">Next Up</p>
+                <p className="title">{nextProfile && nextProfile.nickname}</p>
+              </div>
+            </Level.Item>
+          </Level>
+        </Box>
+      </Section>
 
-      <Content>
-        <h2>Currently serving</h2>
-        {nextProfile && nextProfile.nickname}
-      </Content>
+      <Section>
+        <Content>
+          <h2>Upcoming visits</h2>
+        </Content>
 
-      <Content>
-        <h2>Upcoming visits</h2>
-      </Content>
-      {queueItems && queueItems.filter(item => item.props.visit.status === 'new' || item.props.visit.status === 'in_progress')}
-
-      <Content>
-        <h2>Completed Visits</h2>
-        {console.log("items", queueItems)}
-        {queueItems && queueItems.filter(item => item.props.visit.status === 'done')}
-      </Content>
-    </Section>
+        {queueItems}
+      </Section>
+    </>
   )
 };
 
-export default Queue
+export default Queue;

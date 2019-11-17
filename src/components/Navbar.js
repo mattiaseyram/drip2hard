@@ -4,14 +4,13 @@ import { Link } from '@reach/router';
 import Navbar from 'react-bulma-components/lib/components/navbar';
 import { signOut } from '../utils/actions';
 import ClinicDropdown from './ClinicDropdown'
-
-const supers = ['admin', 'doctor'];
+import { supers } from '../utils/constants';
 
 export default function NavigationBar() {
     const { user, profile } = useContext(FirestoreContext);
     const handleSignOut = () => signOut();
 
-    const navLink = (label, to, options = {} ) => {
+    const navLink = (label, to, options = {}) => {
         const item = (<Navbar.Item renderAs={Link} to={to}>{label}</Navbar.Item>);
         if (options === 'all') return item;
         if (options === 'authed' && user) return item;
@@ -22,17 +21,16 @@ export default function NavigationBar() {
 
     return (
         <Navbar color={'light'}>
-            <Navbar.Brand></Navbar.Brand>
-            <Navbar.Menu>
+            <Navbar.Container>
                 {navLink('Home', '/', 'all')}
                 {navLink('Account', '/account', 'authed')}
                 {navLink('Find Clinic', '/clinics/find', 'authed')}
                 {navLink('Create Clinic', '/clinics/create', 'supers')}
-                {profile && supers.includes(profile.user_type) && <ClinicDropdown/>}
+                {user && <ClinicDropdown />}
                 {navLink('Sign In', '/signin', 'unauthed')}
                 {navLink('Sign Up', '/signup', 'unauthed')}
                 {user && <Navbar.Item onClick={handleSignOut}>Sign Out</Navbar.Item>}
-            </Navbar.Menu>
+            </Navbar.Container>
         </Navbar>
 
     );
