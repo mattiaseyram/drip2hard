@@ -7,59 +7,37 @@ import Button from 'react-bulma-components/lib/components/button';
 
 const VisitStatus = () => {
   const { visits, clinic } = useContext(FirestoreContext)
-  const visitsArr = visits && Object.values(visits)
-  const clickState = {
-    value: 0
-  }
 
-  const visitStatuses = [
-    {
-      status: 'new',
-      color: 'primary'
-    },
-    {
-      status: 'in progress',
-      color: 'info'
-    },
-    {
-      status: 'done',
-      color: 'danger'
-    }
-  ]
 
   const statusMappings = {
     new: {
+      current: 'new',
       next: 'in_progress',
       color: 'primary'
     },
+    in_progress: {
+      current: 'in progress',
+      next: 'done',
+      color: 'info'
+    },
+    done: {
+      current: 'done',
+      next: 'done',
+      color: 'danger'
+    }
   }
 
+  const [state, setState] = useState('new')
   const nextStatus = status => statusMappings[status].next
-  const statusColor = status => statusMappings[status].color
-
-  const [state, setState] = useState(visitStatuses[0])
-  const [clicks, setClicks] = useState(clickState)
-
-  const [count, setCount] = useState(0)
-
-  const incrementCount = increment => {
-    setCount(count + increment)
-  }
 
   const clickHandler = e => {
-    // incrementCount(1)
-    // console.log('counttttt on click', count)
-    // if (count < visitStatuses.length){
-    //   setState(visitStatuses[count + 1])
-    // } else {
-
-    // }
+    const newStatus = nextStatus(state);
+    setState(newStatus)
   }
 
-  console.log("current clinic", clinic)
 
   return (
-    <Button onClick={clickHandler} color={state.color}>{state.status}</Button>
+    <Button onClick={clickHandler} color={statusMappings[state].color}>{state}</Button>
   )
 
 }
