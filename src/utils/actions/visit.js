@@ -16,7 +16,9 @@ export const createVisit = async (data = {}, clinicId) => {
 
 export const updateVisit = async (data = {}, id = '') => {
     try {
-        await visitRef(id || data.id).update({ ...data });
+        let visitData = {...data};
+        delete visitData.time;
+        await visitRef(id || data.id).update(visitData);
     } catch (err) {
         console.error(err);
     }

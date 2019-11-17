@@ -3,6 +3,7 @@ import { useTime } from '../utils/hooks'
 import Level from 'react-bulma-components/lib/components/level';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Box from 'react-bulma-components/lib/components/box';
+<<<<<<< HEAD
 import { Field, Control, Input } from 'react-bulma-components/lib/components/form';
 
 const  millisToMinutesAndSeconds = (time) => {
@@ -37,6 +38,11 @@ const QueueItem = ({ visit }) => {
   const { profile, reason } = visit; 
 
   const formattedTime = getTimeDifference(time, visit.time);
+=======
+import VisitStatus from './VisitStatus'
+
+
+>>>>>>> not working
 
   return (
     <Box className="level-hover">
@@ -55,7 +61,17 @@ const QueueItem = ({ visit }) => {
 
         <Level.Side align="right">
           <Level.Item>
+<<<<<<< HEAD
             {formattedTime}
+=======
+            <Heading size={5} subtitle>time</Heading>
+          </Level.Item>
+        </Level.Side>
+
+        <Level.Side align="right">
+          <Level.Item>
+            <VisitStatus/>
+>>>>>>> not working
           </Level.Item>
         </Level.Side>
       </Level>

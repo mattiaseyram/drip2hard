@@ -24,10 +24,9 @@ export default function App() {
   const { user, profile, profiles } = useUser();
   const { clinics, clinic } = useClinic(clinicId);
   const { visits, visit } = useVisit(visitId);
-  const { time } = useTime();
 
   return (
-    <FirestoreContext.Provider value={{ user, profile, profiles, clinics, clinic, setClinicId, visits, visit, setVisitId, time }}>
+    <FirestoreContext.Provider value={{ user, profile, profiles, clinics, clinic, setClinicId, visits, visit, setVisitId }}>
       <div className="App">
         <Navbar />
         <Container className="has-margin-top">

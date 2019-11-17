@@ -32,7 +32,7 @@ export default function BookVisit({ clinicId }) {
     if (!clinic || clinic.id !== clinicId) setClinicId(clinicId);
 
     const [state, setState] = useState(initialState);
-    
+
     const handleCreateVisit = () => createVisit(state, clinicId);
 
     if (!user || !clinic) return (<p>You are not signed in!</p>);
