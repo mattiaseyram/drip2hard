@@ -17,8 +17,6 @@ const ClinicDropdown = props => {
     setState({ selected });
   }
 
-  console.log('SELECTED', state.selected)
-
     return (
       <Dropdown
         {...props}

@@ -13,7 +13,7 @@ export function useUser() {
                 usersRef.onSnapshot(querySnapshot => {
                     let profiles = {};
                     querySnapshot.forEach(doc => {
-                        profiles[doc.id] = {...doc.data(), id: doc.id};
+                        profiles[doc.id] = { ...doc.data(), id: doc.id };
                     });
 
                     const profile = profiles[user.uid];
@@ -81,4 +81,22 @@ export function useVisit(visitId = '') {
     }, [visitId]);
 
     return state;
+}
+
+export function useTime() {
+    const [date, setDate] = useState(new Date());
+
+    useEffect(() => {
+        var timerID = setInterval(() => tick(), 1000);
+
+        return function cleanup() {
+            clearInterval(timerID);
+        };
+    }, [date]);
+
+    function tick() {
+        setDate(new Date());
+    }
+
+    return { time: date };
 }
