@@ -4,6 +4,8 @@ import Level from 'react-bulma-components/lib/components/level';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Box from 'react-bulma-components/lib/components/box';
 import { Field, Control, Input } from 'react-bulma-components/lib/components/form';
+import VisitStatus from './VisitStatus'
+
 
 const  millisToMinutesAndSeconds = (time) => {
   const neg = time < 0 ? '-' : '';
@@ -28,13 +30,14 @@ const getTimeDifference = (currentTime, visitTime) => {
     <Control>
         <Input className="input is-medium is-rounded has-text-centered" style={{width: 160}} value={formattedDiff} readOnly color={color} />
     </Control>
+
 </Field>
   )
 };
 
 const QueueItem = ({ visit }) => {
   const { time } = useTime();
-  const { profile, reason } = visit; 
+  const { profile, reason } = visit;
 
   const formattedTime = getTimeDifference(time, visit.time);
 
@@ -55,7 +58,13 @@ const QueueItem = ({ visit }) => {
 
         <Level.Side align="right">
           <Level.Item>
-            {formattedTime}
+          {visit.status == 'new' ? formattedTime : null}
+          </Level.Item>
+        </Level.Side>
+
+        <Level.Side align="right">
+          <Level.Item>{}
+            <VisitStatus visit={visit}/>
           </Level.Item>
         </Level.Side>
       </Level>
