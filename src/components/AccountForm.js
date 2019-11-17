@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Field, Control, Select, Label, Input } from 'react-bulma-components/lib/components/form';
 import Button from 'react-bulma-components/lib/components/button';
+import { genders, userTypes } from '../utils/constants';
 
 const myField = (label, value, onChange, inputProps = {}) => (
     <Field>
@@ -11,8 +12,7 @@ const myField = (label, value, onChange, inputProps = {}) => (
     </Field>
 );
 
-const mySelectField = (label, value, onChange, options, inputProps = {}) => {
-    return (
+const mySelectField = (label, value, onChange, options, inputProps = {}) => (
     <Field>
         <Label>{label}</Label>
         <Control>
@@ -21,7 +21,7 @@ const mySelectField = (label, value, onChange, options, inputProps = {}) => {
             </Select>
         </Control>
     </Field>
-);}
+);
 
 const myButton = (label, action, inputProps = {}) => (
     <Field kind="group">
@@ -34,23 +34,26 @@ const myButton = (label, action, inputProps = {}) => (
 export default function AccountForm({ buttonLabel, user, profile, action, includeEmailPassword }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [state, setState] = useState({ nickname: '', user_type: 'user' });
+    const [state, setState] = useState({ nickname: '', user_type: userTypes[0], gender: genders[0], age: '0' });
 
     useEffect(() => {
         const nickname = profile ? profile.nickname : '';
-        const user_type = profile ? profile.user_type : 'user';
-        setState(state => ({ ...state, nickname, user_type }));
+        const user_type = profile ? profile.user_type : userTypes[0];
+        const gender = profile ? profile.gender : genders[0];
+        const age = profile ? profile.age : '0';
+        setState(state => ({ ...state, nickname, user_type, gender, age }));
     }, [profile]);
 
     const handleAction = () => includeEmailPassword ? action(email, password, state) : action(state);
 
-    const userTypes = ['user', 'admin', 'doctor'];
     return (
         <>
             {includeEmailPassword && myField('Email', email, setEmail)}
             {includeEmailPassword && myField('Password', password, setPassword, { type: 'password' })}
             {myField('Nickname', state.nickname, nickname => setState({ ...state, nickname }))}
+            {myField('Age', state.age, age => setState({ ...state, age }))}
             {mySelectField('User Type', state.user_type, user_type => setState({ ...state, user_type }), userTypes)}
+            {mySelectField('Gender', state.gender, gender => setState({ ...state, gender }), genders)}
             {myButton(buttonLabel, handleAction)}
         </>
     );
