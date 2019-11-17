@@ -23,7 +23,7 @@ const Queue = () => {
   const formattedTime = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
 
   const nextVisit = clinic.next_visit_id && visits && visits[clinic.next_visit_id];
-  const nextProfile = nextVisit && (!nextVisit.status || nextVisit.status === 'new') && profiles && profiles[nextVisit.user_id];
+  const nextProfile = nextVisit && nextVisit.status === 'new' && profiles && profiles[nextVisit.user_id];
 
   return (
     <Section>
