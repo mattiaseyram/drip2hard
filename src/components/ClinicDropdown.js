@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import Dropdown from 'react-bulma-components/lib/components/dropdown'
+import Navbar from 'react-bulma-components/lib/components/navbar';
 import { FirestoreContext } from '../utils/context'
 import { Link } from '@reach/router';
 
@@ -17,21 +17,21 @@ const ClinicDropdown = props => {
     setState({ selected });
   }
 
-    return (
-      <Dropdown
-      className="clinic-dropdown"
-        {...props}
+  return (
+    <Navbar.Item dropdown hoverable>
+      <Navbar.Link>Clinics</Navbar.Link>
+      <Navbar.Dropdown
         value={state.selected}
         onChange={onChange}
-        color="info"
         label="Clinics">
-          {clinicsArr && clinicsArr.map(c => (
-            <Dropdown.Item value={c.id} key={c.id} renderAs={Link} to={`/admin/${c.id}`}>
-              {c.id}
-            </Dropdown.Item>
-          ))}
-      </Dropdown>
-    );
+        {clinicsArr && clinicsArr.map(c => (
+          <Navbar.Item value={c.id} key={c.id} renderAs={Link} to={`/admin/${c.id}`}>
+            {c.id}
+          </Navbar.Item>
+        ))}
+      </Navbar.Dropdown>
+    </Navbar.Item>
+  );
 }
 
 export default ClinicDropdown

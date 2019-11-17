@@ -13,12 +13,15 @@ import Button from 'react-bulma-components/lib/components/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-const initialViewport = {
-    height: "80vh",
-    width: "100%",
-    latitude: 0,
-    longitude: 0,
-    zoom: 12
+const initialState = {
+    viewport: {
+        height: "80vh",
+        width: "100%",
+        latitude: 0,
+        longitude: 0,
+        zoom: 12
+    },
+    currentCoords: { latitude: 0, longitude: 0 }
 };
 
 const clinicItem = (clinic, key) => (
@@ -44,15 +47,23 @@ export default function FindClinic() {
     const { user, clinics } = useContext(FirestoreContext);
     const clinicsArr = clinics ? Object.values(clinics) : [];
 
-    const [viewport, setViewport] = useState(initialViewport);
-    const [currentCoords, setCurrentCoords] = useState({ latitude: 0, longitude: 0 });
+    const [state, setState] = useState(initialState);
 
     useEffect(() => {
-        return navigator.geolocation.getCurrentPosition(pos => {
-            const coords = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
-            setCurrentCoords(coords);
-            setViewport(viewport => ({ ...viewport, ...coords }));
-        });
+        function getLocation() {
+            navigator.geolocation.getCurrentPosition(pos => {
+                const coords = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
+                setState(state => ({
+                    viewport: {
+                        ...state.viewport,
+                        latitude: coords.latitude,
+                        longitude: coords.longitude
+                    },
+                    currentCoords: { ...coords }
+                }));
+            });
+        };
+        return getLocation();
     }, []);
 
     const clinicItems = clinicsArr.map((clinic, i) => clinicItem(clinic, i));
@@ -69,7 +80,7 @@ export default function FindClinic() {
     });
 
     const userMarker = (
-        <Marker latitude={currentCoords.latitude} longitude={currentCoords.longitude}>
+        <Marker latitude={state.currentCoords.latitude} longitude={state.currentCoords.longitude}>
             <Box><FontAwesomeIcon icon={faUser} /></Box>
         </Marker>
     );
@@ -84,8 +95,8 @@ export default function FindClinic() {
                 </Columns.Column>
                 <Columns.Column size="half">
                     <ReactMapGL
-                        {...viewport}
-                        onViewportChange={viewport => setViewport(viewport)}
+                        {...state.viewport}
+                        onViewportChange={viewport => setState({ ...state, viewport })}
                         mapboxApiAccessToken={mapGLToken}>
                         {clinicMarkers}
                         {userMarker}

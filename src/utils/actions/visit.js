@@ -33,6 +33,7 @@ export const updateVisit = async (data = {}, id = '') => {
     try {
         let visitData = { ...data };
         delete visitData.time;
+        delete visitData.profile;
         await visitRef(id || data.id).update(visitData);
     } catch (err) {
         console.error(err);
@@ -49,7 +50,7 @@ export const updateVisit = async (data = {}, id = '') => {
 export const getExpectedTime = async (visit, profile) => {
     try {
         const gender = genders.findIndex(item => item === profile.gender);
-        const age = profile.age || 0;
+        const age = parseInt(profile.age || 0);
         const clinic = 0;
         const date = visit.time.toISOString().slice(0,10);
         const dropdown = reasons.findIndex(item => item === visit.reason);

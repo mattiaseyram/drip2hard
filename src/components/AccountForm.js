@@ -3,6 +3,13 @@ import { Field, Control, Select, Label, Input } from 'react-bulma-components/lib
 import Button from 'react-bulma-components/lib/components/button';
 import { genders, userTypes } from '../utils/constants';
 
+const initialState = {
+    nickname: '',
+    user_type: userTypes[0],
+    gender: genders[0],
+    age: '0'
+};
+
 const myField = (label, value, onChange, inputProps = {}) => (
     <Field>
         <Label>{label}</Label>
@@ -34,7 +41,7 @@ const myButton = (label, action, inputProps = {}) => (
 export default function AccountForm({ buttonLabel, user, profile, action, includeEmailPassword }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [state, setState] = useState({ nickname: '', user_type: userTypes[0], gender: genders[0], age: '0' });
+    const [state, setState] = useState(initialState);
 
     useEffect(() => {
         const nickname = profile ? profile.nickname : '';
