@@ -45,7 +45,6 @@ const Queue = () => {
 
       <Content>
         <h2>Completed Visits</h2>
-        {console.log("items", queueItems)}
         {queueItems && queueItems.filter(item => item.props.visit.status === 'done')}
       </Content>
     </Section>
